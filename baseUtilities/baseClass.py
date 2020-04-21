@@ -1,12 +1,13 @@
-from selenium.webdriver.common.by import By
-import logs.customlogger as cl
 import logging
 import traceback
 from _datetime import datetime
 
+from selenium.webdriver.common.by import By
+
+import logs.customlogger as cl
+
 
 class BaseClass():
-
     # Writing logs in Logger file
     log = cl.customLogger(logging.DEBUG)
 
@@ -43,6 +44,7 @@ class BaseClass():
     def send_keys_Element(self, locator_type, locator_value, pass_value):
         try:
             element = self.getType(locator_type)
+            self.driver.find_element(element, locator_value).clear()
             self.driver.find_element(element, locator_value).send_keys(pass_value)
             print("Value is inserted in the textfield..")
 

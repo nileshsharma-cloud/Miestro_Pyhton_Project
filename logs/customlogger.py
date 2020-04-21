@@ -1,5 +1,5 @@
-import logging
 import inspect
+import logging
 
 
 def customLogger(loglevel):
@@ -11,7 +11,7 @@ def customLogger(loglevel):
     logger.setLevel(logging.DEBUG)
 
     # Generating the logs in different folder
-    fileHandler = logging.FileHandler(filename=r"logs/automation.log", mode='a')
+    fileHandler = logging.FileHandler(filename=r"F:/Miestro_PythonProject/logs/automation.log", mode='a')
     fileHandler.setLevel(loglevel)
 
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s: %(message)s',

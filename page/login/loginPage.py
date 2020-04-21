@@ -1,8 +1,9 @@
-from baseUtilities.baseClass import BaseClass
-import logs.customlogger as cl
-import logging
 import configparser
-from readdata.readdatafromCSV import ReadData
+import logging
+
+import logs.customlogger as cl
+from baseUtilities.baseClass import BaseClass
+from readdata.readfromExcel import ReadFromExcel
 
 
 class LoginPage(BaseClass):
@@ -19,24 +20,32 @@ class LoginPage(BaseClass):
     # Locators of Login Page
     username = "email"
     password = "password"
-    login_button = "//button[@class='btnBasic btnBasic_theme_darkBlue btnBasic_size_full']"
+    login_button = "//button[contains(@class,'previous-button')]"
 
     # Write logs in Logger file
     log = cl.customLogger(logging.DEBUG)
 
     # Create object of Read Data from CSV file
-    rd = ReadData()
-    value = rd.getCSVData()
+    # rd = ReadData()
+    # value = rd.getCSVData()
+
+    rd = ReadFromExcel("F:/Miestro_PythonProject/readdata/user_data.xlsx")
 
     # Check login functionality with valid username and password.
     def checkLoginWithValidCredentials(self):
         self.clickElement(self.getType("name"), self.username)
+
         # Enter values from csv file
-        self.send_keys_Element(self.getType("name"), self.username, self.value['username'][0])
+        # self.send_keys_Element(self.getType("name"), self.username, username)
+
+        self.send_keys_Element(self.getType("name"), self.username, self.rd.readData(0, i, 0))
         self.log.info("Username is entered")
 
         self.clickElement(self.getType("name"), self.password)
-        self.send_keys_Element(self.getType("name"), self.password, self.value['password'][0])
+
+        # self.send_keys_Element(self.getType("name"), self.password, password)
+
+        self.send_keys_Element(self.getType("name"), self.password, self.rd.readData(0, i, 0))
         self.log.info("password is entered")
 
         # Enter values from Properties file
