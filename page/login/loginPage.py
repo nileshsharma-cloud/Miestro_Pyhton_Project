@@ -55,3 +55,4 @@ class LoginPage(BaseClass):
 
         self.clickElement(self.getType("xpath"), self.login_button)
         self.log.info("User is able to login.")
+        self.log.info("Test executed successfully.")
